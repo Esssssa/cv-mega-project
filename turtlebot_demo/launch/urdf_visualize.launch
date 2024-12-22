@@ -1,0 +1,24 @@
+<launch>
+  <!-- Set the robot model parameter -->
+  <arg name="model" default="waffle" doc="model type [burger, waffle, waffle_pi]"/>
+  
+ Load the URDF/XACRO file
+
+  <!-- <param name="robot_description"
+    command="$(find xacro)/xacro '$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro'" />  -->
+
+  <!-- If you want to use your custom URDF, comment above and uncomment below --> 
+  
+  <param name="robot_description"
+    command="$(find xacro)/xacro '$(find turtlebot_demo)/urdf/turtlebot3_$(arg model).urdf.xacro'" />
+ 
+  
+  <!-- Start RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot3_description)/rviz/model.rviz"/>
+  
+  <!-- Joint state publisher with GUI -->
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+  
+  <!-- Robot state publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+</launch>
